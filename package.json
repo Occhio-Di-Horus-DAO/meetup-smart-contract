@@ -1,0 +1,34 @@
+{
+  "name": "Meetup",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "console": "truffle console",
+    "compile": "truffle compile",
+    "release:local": "truffle migrate",
+    "release:reset": "truffle migrate --reset",
+    "release:test": "truffle migrate --network polygonTestnet",
+    "test": "truffle test",
+    "lint": "eslint . && prettier --check ."
+  },
+  "keywords": ["web3","solidity","ethereum", "truffle", "openzeppelin"],
+  "author": "Robert Casanova <robb.casanova@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.5.0",
+    "@truffle/hdwallet-provider": "^2.0.3",
+    "truffle": "^5.5.3"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-helpers": "^0.5.15",
+    "chai": "^4.3.6",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
+    "mocha": "^9.2.1",
+    "prettier": "2.5.1"
+  }
+}
