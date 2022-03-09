@@ -1,5 +1,18 @@
 # Meetup on EVM Chain
 
+## Idea
+
+This repo contains the blockchain part of a Web3 application to organize Meetups and earn some economic contribution from participants.
+
+A participant can contribute in two ways:
+
+- add a new topic to be discussed during the meetup (cost 0.5 Matic)
+- like a proposed topic (cost 0.1 Matic)
+
+The total amount is split between the organizers in equal parts.
+
+## Code
+
 This project contains a couple of smart contracts that can be deployed on EVM compatible blockchains. They are written in [Solidity](https://docs.soliditylang.org/en/v0.8.12/) using [Truffle Suite](https://trufflesuite.com/).
 
 - If you want to run this project locally you must install and run [`ganache`](https://github.com/trufflesuite/ganache)
