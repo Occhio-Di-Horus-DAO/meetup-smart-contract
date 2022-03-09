@@ -44,7 +44,7 @@ contract Meetup is AccessControl {
         }
     }
 
-    function addTopic(string memory topic)
+    function addTopic(string calldata topic)
         external
         payable
         cost(ADD_TOPIC_COST)
