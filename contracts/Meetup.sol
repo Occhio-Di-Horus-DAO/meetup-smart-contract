@@ -28,8 +28,8 @@ contract Meetup is AccessControl {
     event NewTopic(address user, string message);
     event NewLike(uint8 topicIndex, uint256 likes);
 
-    modifier cost(uint256 price) {
-        require(msg.value == price, "Wrong amount of money!");
+    modifier cost(uint256 _price) {
+        require(msg.value == _price, "Wrong amount of money!");
         _;
     }
 
@@ -44,23 +44,23 @@ contract Meetup is AccessControl {
         }
     }
 
-    function addTopic(string calldata topic)
+    function addTopic(string calldata _topic)
         external
         payable
         cost(ADD_TOPIC_COST)
     {
         // +1 because the new topic is not yet added to the list
         require(topics.length + 1 <= 10, "Max 10 topics allowed");
-        topics.push(Topic({user: msg.sender, likes: 0, message: topic}));
-        emit NewTopic(msg.sender, topic);
+        topics.push(Topic({user: msg.sender, likes: 0, message: _topic}));
+        emit NewTopic(msg.sender, _topic);
     }
 
-    function like(uint8 index) external payable cost(LIKE_COST) {
-        require(index >= 0 && index < topics.length);
-        Topic storage t = topics[index];
+    function like(uint8 _index) external payable cost(LIKE_COST) {
+        require(_index >= 0 && _index < topics.length);
+        Topic storage t = topics[_index];
         require(msg.sender != t.user, "Operation not permitted!"); // the user that creates the topic cannot like it
         t.likes++;
-        emit NewLike(index, t.likes);
+        emit NewLike(_index, t.likes);
     }
 
     function withdraw() external returns (bool) {
