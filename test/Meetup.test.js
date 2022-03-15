@@ -27,6 +27,18 @@ contract("Meetup", ([owner, organizer1, organizer2, user1, user2]) => {
     expect(organizers[1]).to.equal(organizer2);
   });
 
+  it("user can know how many topics have been added until now", async () => {
+    for (let i = 0; i < 10; i++) {
+      await meetup.addTopic(`topic ${i}`, {
+        from: i % 2 ? user1 : user2, // it's user indipendent
+        value: web3.utils.toWei("0.5", "ether"),
+      });
+    }
+
+    const numberOfTopics = await meetup.getTopicsCount();
+    expect(Number(numberOfTopics)).to.equal(10);
+  });
+
   it("user can add a new topic passing a message and 0.5 MATIC", async () => {
     const msg =
       "I want to discuss the difference between Ethereum and Bitcoin.";

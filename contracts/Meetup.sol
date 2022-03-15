@@ -5,8 +5,6 @@ import "./PayOrganizers.sol";
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
-// import "@openzeppelin/contracts/finance/PaymentSplitter.sol";
-
 contract Meetup is AccessControl {
     
     struct Topic {
@@ -53,6 +51,11 @@ contract Meetup is AccessControl {
         require(topics.length + 1 <= 10, "Max 10 topics allowed");
         topics.push(Topic({user: msg.sender, likes: 0, message: _topic}));
         emit NewTopic(msg.sender, _topic);
+    }
+
+    // This is required because is not possible to get the size of a public array inside state
+    function getTopicsCount() view external returns(uint) {
+        return topics.length;
     }
 
     function like(uint8 _index) external payable cost(LIKE_COST) {
