@@ -18,8 +18,8 @@ contract Meetup is AccessControl {
 
     bytes32 private constant ORGANIZER_ROLE = keccak256("ORGANIZER_ROLE");
 
-    address payable private owner;
-    PayOrganizers public payOrganizers;
+    address payable private immutable owner;
+    PayOrganizers public immutable payOrganizers;
 
     Topic[] public topics;
 
