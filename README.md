@@ -19,7 +19,7 @@ This project contains a couple of smart contracts that can be deployed on EVM co
 
 - If you want to run this project on `Polygon Mumbai Testnet` you need to rename `.secret.sample` file to `.secret` and write your wallet private key to it. (please create a dedicated account for these tests to avoid exposing your main key, check [Metamask](https://metamask.io/))
 
-- If you want to play with the deployed contract use [0xC4D3e3D0C12B4a2E221d94fe82F93583C162B88F](https://mumbai.polygonscan.com/address/0xC4D3e3D0C12B4a2E221d94fe82F93583C162B88F)
+- If you want to play with the deployed contract use [0x3f84CfAa0145d8dC267F56a37949D95a6789C455](https://mumbai.polygonscan.com/address/0x3f84CfAa0145d8dC267F56a37949D95a6789C455)
 
 
 ## Install

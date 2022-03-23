@@ -1,3 +1,4 @@
 build
 node_modules
 .secret
+migrations/1647363238_update_meetup_contract.js
