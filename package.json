@@ -11,6 +11,7 @@
     "release:test": "truffle migrate --network polygonTestnet",
     "test": "truffle test",
     "lint": "eslint . && prettier --check .",
+    "verify": "truffle run verify Meetup PayOrganizers --network polygonTestnet --debug",
     "prepare": "husky install"
   },
   "keywords": [
@@ -25,6 +26,7 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.5.0",
     "@truffle/hdwallet-provider": "^2.0.3",
+    "dotenv": "^16.0.0",
     "truffle": "^5.5.3"
   },
   "devDependencies": {
@@ -39,6 +41,7 @@
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "mocha": "^9.2.1",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "truffle-plugin-verify": "^0.5.24"
   }
 }

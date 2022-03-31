@@ -17,14 +17,20 @@ This project contains a couple of smart contracts that can be deployed on EVM co
 
 - If you want to run this project locally you must install and run [`ganache`](https://github.com/trufflesuite/ganache)
 
-- If you want to run this project on `Polygon Mumbai Testnet` you need to rename `.secret.sample` file to `.secret` and write your wallet private key to it. (please create a dedicated account for these tests to avoid exposing your main key, check [Metamask](https://metamask.io/))
+- If you want to run this project on `Polygon Mumbai Testnet` you need to proper setup your `.env` file. (explained later)
 
-- If you want to play with the deployed contract use [0x3f84CfAa0145d8dC267F56a37949D95a6789C455](https://mumbai.polygonscan.com/address/0x3f84CfAa0145d8dC267F56a37949D95a6789C455)
+- If you want to play with the deployed contract use [0x816d702F44d7A0cbd0B2b362b3C8724b9328203f](https://mumbai.polygonscan.com/address/0x816d702F44d7A0cbd0B2b362b3C8724b9328203f)
 
 
 ## Install
 
 `npm i`
+
+## Setup .env variables
+
+- Rename `.env.sample` in `.env`
+- Add the private key to your test account wallet (please create a dedicated account for these tests to avoid exposing your main key, check [Metamask](https://metamask.io/))
+
 
 ## Compile contracts
 

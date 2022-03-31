@@ -1,6 +1,6 @@
+require("dotenv").config();
+
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const fs = require("fs");
-const polygonTestnetPrivateKey = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
   networks: {
@@ -13,8 +13,8 @@ module.exports = {
     polygonTestnet: {
       provider: () =>
         new HDWalletProvider({
-          privateKeys: [polygonTestnetPrivateKey],
-          providerOrUrl: `https://rpc-mumbai.matic.today`,
+          privateKeys: [process.env.MUMBAI_PRIVATE_KEY],
+          providerOrUrl: process.env.MUMBAI_PROVIDER_URL,
         }),
       network_id: 80001,
       confirmations: 2,
@@ -32,7 +32,13 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.12",
+      version: "0.8.13",
     },
   },
+
+  // for verify plugin
+  api_keys: {
+    polygonscan: process.env.POLYGONSCAN_KEY,
+  },
+  plugins: ["truffle-plugin-verify"],
 };
