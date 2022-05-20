@@ -9,7 +9,7 @@ A participant can contribute in two ways:
 - add a new topic to be discussed during the meetup (cost 0.5 Matic)
 - like a proposed topic (cost 0.1 Matic)
 
-The total amount is split between the organizers in equal parts.
+The total amount can be withdraw from the organization of the Meetup and splitted between the organizers in equal parts.
 
 ## Code
 
@@ -19,7 +19,7 @@ This project contains a couple of smart contracts that can be deployed on EVM co
 
 - If you want to run this project on `Polygon Mumbai Testnet` you need to proper setup your `.env` file. (explained later)
 
-- If you want to play with the deployed contract use [0x816d702F44d7A0cbd0B2b362b3C8724b9328203f](https://mumbai.polygonscan.com/address/0x816d702F44d7A0cbd0B2b362b3C8724b9328203f)
+- If you want to play with the Meetup deployed contract use [0xc68EafAf44bF73cc7469E1aFC0e3a4a687a55961](https://mumbai.polygonscan.com/address/0xc68EafAf44bF73cc7469E1aFC0e3a4a687a55961)
 
 
 ## Install
@@ -47,7 +47,8 @@ This project contains a couple of smart contracts that can be deployed on EVM co
 
 - [Meetup.sol](contracts/Meetup.sol)
 - [MeetupFactory.sol](contracts/MeetupFactory.sol)
-- [PayOrganizers.sol](contracts/PayOrganizers.sol) (for more info refer to OpenZeppelin [PaymentSplitter](https://docs.openzeppelin.com/contracts/2.x/api/payment#PaymentSplitter))
+- [Organization.sol](contracts/Organization.sol)
+- [OrganizationFactory.sol](contracts/OrganizationFactory.sol)
 ## Contracts specs (Meetup.sol)
 (check test folder for details)
 
@@ -58,8 +59,8 @@ This project contains a couple of smart contracts that can be deployed on EVM co
 - ✓ user can like a topic passing exactly 0.1 MATIC
 - ✓ user cannot like a non existing topic
 - ✓ user cannot like a topic he proposed
-- ✓ organizers can withdraw the MATIC balance accumulated, the balance is moved to PayOrganizers contract
-- ✓ contract owner can withdraw the MATIC balance accumulated, the balance is moved to PayOrganizers contract
+- ✓ organizers can withdraw the MATIC balance accumulated, the balance is moved to Organization contract
+- ✓ contract owner can withdraw the MATIC balance accumulated, the balance is moved to Organization contract
 - ✓ user cannot withdraw the MATIC balance accumulated
 - ✓ owner can kill the contract and get all the balance accumulated, this is done for safety reason
 - ✓ contract should emit NewTopic event when a new topic is submitted

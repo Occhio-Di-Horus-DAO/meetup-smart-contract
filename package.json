@@ -11,7 +11,7 @@
     "release:test": "truffle migrate --network polygonTestnet",
     "test": "truffle test",
     "lint": "eslint .",
-    "verify": "truffle run verify Meetup PayOrganizers MeetupFactory --network polygonTestnet --debug",
+    "verify": "truffle run verify Meetup Organization MeetupFactory OrganizationFactory --network polygonTestnet --debug",
     "prepare": "husky install"
   },
   "keywords": [

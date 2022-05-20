@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.14;
 
-import "./PayOrganizers.sol";
+import "./Organization.sol";
 import "./Meetup.sol";
 
 contract MeetupFactory {
@@ -9,8 +9,8 @@ contract MeetupFactory {
 
   event NewMeetup(Meetup newMeetup);
 
-  function createMeetup(PayOrganizers _payOrganizers) external {
-    Meetup meetup = new Meetup(_payOrganizers);
+  function createMeetup(Organization _organization) external {
+    Meetup meetup = new Meetup(_organization);
     meetups.push(meetup);
     emit NewMeetup(meetup);
   }
