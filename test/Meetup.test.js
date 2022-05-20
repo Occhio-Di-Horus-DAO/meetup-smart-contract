@@ -3,26 +3,27 @@ const { expectRevert, expectEvent } = require("@openzeppelin/test-helpers");
 const { web3 } = require("@openzeppelin/test-helpers/src/setup");
 
 const Meetup = artifacts.require("Meetup");
-const PayOrganizers = artifacts.require("PayOrganizers");
+const Organization = artifacts.require("Organization");
 
 contract("Meetup", ([owner, organizer1, organizer2, user1, user2]) => {
-  let payOrganizers, meetup;
+  let organization, meetup;
 
   beforeEach(async () => {
-    payOrganizers = await PayOrganizers.new(
+    organization = await Organization.new(
+      "OcchioDiHorusDAO",
       [organizer1, organizer2],
       [50, 50],
       { from: owner }
     );
-    meetup = await Meetup.new(payOrganizers.address, { from: owner });
+    meetup = await Meetup.new(organization.address, { from: owner });
   });
 
   it("user can know organizers", async () => {
-    const payOrganizersContractAddress = await meetup.payOrganizers({
+    const organizationContractAddress = await meetup.organization({
       from: user1,
     });
-    const payOrganizers = await PayOrganizers.at(payOrganizersContractAddress);
-    const organizers = await payOrganizers.getOrganizers();
+    const organization = await Organization.at(organizationContractAddress);
+    const organizers = await organization.getOrganizers();
     expect(organizers[0]).to.equal(organizer1);
     expect(organizers[1]).to.equal(organizer2);
   });
@@ -140,7 +141,7 @@ contract("Meetup", ([owner, organizer1, organizer2, user1, user2]) => {
     );
   });
 
-  it("organizers can withdraw the MATIC balance accumulated, the balance is moved to PayOrganizers contract", async () => {
+  it("organizers can withdraw the MATIC balance accumulated, the balance is moved to Organization contract", async () => {
     await meetup.addTopic("Topic 1", {
       from: user1,
       value: web3.utils.toWei("0.5", "ether"),
@@ -155,15 +156,15 @@ contract("Meetup", ([owner, organizer1, organizer2, user1, user2]) => {
       from: organizer1,
     });
 
-    const payOrganizersContractAddress = await meetup.payOrganizers(); // this is a getter despite the name
+    const organizationContractAddress = await meetup.organization();
     const organizersBalance = await web3.eth.getBalance(
-      payOrganizersContractAddress
+      organizationContractAddress
     );
     expect(organizersBalance).to.equal(meetupBalance);
     expect(await web3.eth.getBalance(meetup.address)).to.equal("0");
   });
 
-  it("contract owner can withdraw the MATIC balance accumulated, the balance is moved to PayOrganizers contract", async () => {
+  it("contract owner can withdraw the MATIC balance accumulated, the balance is moved to Organization contract", async () => {
     await meetup.addTopic("Topic 1", {
       from: user1,
       value: web3.utils.toWei("0.5", "ether"),
@@ -178,11 +179,11 @@ contract("Meetup", ([owner, organizer1, organizer2, user1, user2]) => {
       from: owner,
     });
 
-    const payOrganizersContractAddress = await meetup.payOrganizers(); // this is a getter despite the name
-    const organizersBalance = await web3.eth.getBalance(
-      payOrganizersContractAddress
+    const organizationContractAddress = await meetup.organization();
+    const organizationBalance = await web3.eth.getBalance(
+      organizationContractAddress
     );
-    expect(organizersBalance).to.equal(meetupBalance);
+    expect(organizationBalance).to.equal(meetupBalance);
     expect(await web3.eth.getBalance(meetup.address)).to.equal("0");
   });
 

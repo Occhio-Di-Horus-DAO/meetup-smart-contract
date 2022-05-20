@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.14;
 
-import "./PayOrganizers.sol";
+import "./Organization.sol";
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
@@ -19,7 +19,7 @@ contract Meetup is AccessControl {
     bytes32 private constant ORGANIZER_ROLE = keccak256("ORGANIZER_ROLE");
 
     address payable private immutable owner;
-    PayOrganizers public immutable payOrganizers;
+    Organization public immutable organization;
 
     Topic[] public topics;
 
@@ -31,10 +31,10 @@ contract Meetup is AccessControl {
         _;
     }
 
-    constructor(PayOrganizers _payOrganizers) {
+    constructor(Organization _organization) {
         owner = payable(msg.sender);
-        payOrganizers = _payOrganizers;
-        address[] memory organizers = _payOrganizers.getOrganizers();
+        organization = _organization;
+        address[] memory organizers = _organization.getOrganizers();
 
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
         for (uint256 i = 0; i < organizers.length; i++) {
@@ -74,7 +74,7 @@ contract Meetup is AccessControl {
         );
 
         uint256 amount = address(this).balance;
-        (bool success, ) = address(payOrganizers).call{value: amount}("");
+        (bool success, ) = address(organization).call{value: amount}("");
         require(success);
         return success;
     }
