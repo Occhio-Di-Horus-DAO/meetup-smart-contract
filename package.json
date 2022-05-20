@@ -10,8 +10,8 @@
     "release:reset": "truffle migrate --reset",
     "release:test": "truffle migrate --network polygonTestnet",
     "test": "truffle test",
-    "lint": "eslint . && prettier --check .",
-    "verify": "truffle run verify Meetup PayOrganizers --network polygonTestnet --debug",
+    "lint": "eslint .",
+    "verify": "truffle run verify Meetup PayOrganizers MeetupFactory --network polygonTestnet --debug",
     "prepare": "husky install"
   },
   "keywords": [
