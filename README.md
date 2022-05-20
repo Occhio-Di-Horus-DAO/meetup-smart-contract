@@ -46,8 +46,9 @@ This project contains a couple of smart contracts that can be deployed on EVM co
 ## Contracts
 
 - [Meetup.sol](contracts/Meetup.sol)
+- [MeetupFactory.sol](contracts/MeetupFactory.sol)
 - [PayOrganizers.sol](contracts/PayOrganizers.sol) (for more info refer to OpenZeppelin [PaymentSplitter](https://docs.openzeppelin.com/contracts/2.x/api/payment#PaymentSplitter))
-## Contracts specs 
+## Contracts specs (Meetup.sol)
 (check test folder for details)
 
 - ✓ user can know organizers
