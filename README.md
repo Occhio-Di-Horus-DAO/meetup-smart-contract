@@ -2,14 +2,7 @@
 
 ## Idea
 
-This repo contains the blockchain part of a Web3 application to organize Meetups and earn some economic contribution from participants.
-
-A participant can contribute in two ways:
-
-- add a new topic to be discussed during the meetup (cost 0.5 Matic)
-- like a proposed topic (cost 0.1 Matic)
-
-The total amount can be withdraw from the organization of the Meetup and splitted between the organizers in equal parts.
+[Documentation](https://open-meetup.github.io/#/vocabulary/)
 
 ## Code
 
@@ -45,11 +38,20 @@ This project contains a couple of smart contracts that can be deployed on EVM co
 `npm run release:test`
 ## Contracts
 
-- [Meetup.sol](contracts/Meetup.sol)
-- [MeetupFactory.sol](contracts/MeetupFactory.sol)
-- [Organization.sol](contracts/Organization.sol)
-- [OrganizationFactory.sol](contracts/OrganizationFactory.sol)
-## Contracts specs (Meetup.sol)
+- [Community.sol](contracts/Community.sol)
+- [CommunityFactory.sol](contracts/CommunityFactory.sol)
+- [Meetup.sol](contracts/Meetup.sol) OLD (@TODO must be updated)
+- [Organization.sol](contracts/Organization.sol) OLD (@TODO must be updated)
+
+## Contracts specs (CommunityFactory.sol)
+(check test folder for details)
+- ✔ as owner I can change Community contract address
+- ✔ as owner I can change Community creation cost
+- ✔ as owner I can withdraw the contract balance
+- ✔ as user I can create a Community by passing 3 Matic
+- ✔ as user I cannot create a Community by passing less than 3 Matic
+- ✔ as user I can check if an address belongs to a Community contract created by CommunityFactory
+## Contracts specs (Meetup.sol) OLD
 (check test folder for details)
 
 - ✓ user can know organizers
@@ -65,5 +67,7 @@ This project contains a couple of smart contracts that can be deployed on EVM co
 - ✓ owner can kill the contract and get all the balance accumulated, this is done for safety reason
 - ✓ contract should emit NewTopic event when a new topic is submitted
 - ✓ contract should emit NewLike event when a new like is submitted
+
+
 
 

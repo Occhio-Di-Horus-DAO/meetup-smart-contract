@@ -200,30 +200,6 @@ contract("Meetup", ([owner, organizer1, organizer2, user1, user2]) => {
     );
   });
 
-  it("owner can kill the contract and get all the balance accumulated, this is done for safety reason", async () => {
-    const ownerBalance = await web3.eth.getBalance(owner);
-    await meetup.addTopic("Topic 1", {
-      from: user1,
-      value: web3.utils.toWei("0.5", "ether"),
-    });
-    const meetupBalance = await web3.eth.getBalance(meetup.address);
-    const receipt = await meetup.kill({
-      from: owner,
-    });
-
-    const newOwnerBalance = await web3.eth.getBalance(owner);
-    const tx = await web3.eth.getTransaction(receipt.tx);
-    const gasUsed = receipt.receipt.gasUsed;
-    const gasCost = tx.gasPrice;
-
-    const expectedOwnerBalance =
-      Number(ownerBalance) -
-      Number(gasUsed) * Number(gasCost) +
-      Number(meetupBalance);
-
-    expect(Number(newOwnerBalance)).to.equal(expectedOwnerBalance);
-  });
-
   it("should emit NewTopic event when a new topic is submitted", async () => {
     const receipt = await meetup.addTopic("Topic 1", {
       from: user1,
