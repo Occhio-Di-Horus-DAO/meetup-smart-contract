@@ -5,14 +5,17 @@
   "main": "index.js",
   "scripts": {
     "console": "truffle console",
-    "compile": "truffle compile",
-    "release:local": "truffle migrate",
-    "release:reset": "truffle migrate --reset",
-    "release:test": "truffle migrate --network polygonTestnet",
+    "develop": "truffle develop",
+    "release:ganache": "truffle migrate --network ganache",
+    "release:ganache:reset": "truffle migrate --network ganache --reset",
+    "release:mumbai": "truffle migrate --network mumbai",
+    "release:mumbai:reset": "truffle migrate --network mumbai --reset",
+    "console:ganache": "truffle console --network ganache",
+    "console:mumbai": "truffle console --network mumbai",
     "test": "truffle test",
     "test:debug": "truffle test --debug",
     "lint": "eslint .",
-    "verify": "truffle run verify Meetup Organization MeetupFactory OrganizationFactory --network polygonTestnet --debug",
+    "verify": "truffle run verify Meetup Organization MeetupFactory OrganizationFactory --network mumbai --debug",
     "prepare": "husky install"
   },
   "keywords": [
