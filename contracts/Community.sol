@@ -32,6 +32,7 @@ contract Community is Initializable, AccessControl  {
 
  function transferFounder(address _account) external onlyRole(COMMUNITY_FOUNDER) {
    renounceRole(COMMUNITY_FOUNDER, msg.sender);
+   _grantRole(MEETUP_ORGANIZER, msg.sender);
    _grantRole(COMMUNITY_FOUNDER, _account);
   }
 }
