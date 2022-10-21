@@ -6,8 +6,6 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 
 contract Community is Initializable, AccessControl  {
  
-
-
   bytes32 public constant COMMUNITY_FOUNDER = keccak256("COMMUNITY_FOUNDER");
   bytes32 public constant MEETUP_ORGANIZER = keccak256("MEETUP_ORGANIZER");
 
@@ -18,8 +16,8 @@ contract Community is Initializable, AccessControl  {
     name = _name;
     founder = _founder;
 
-  _setupRole(COMMUNITY_FOUNDER, _founder);
-  _setupRole(MEETUP_ORGANIZER, _founder);
+    _setupRole(COMMUNITY_FOUNDER, _founder);
+    _setupRole(MEETUP_ORGANIZER, _founder);
   }
 
 
@@ -34,9 +32,7 @@ contract Community is Initializable, AccessControl  {
 
  function transferFounder(address _account) external onlyRole(COMMUNITY_FOUNDER) {
    renounceRole(COMMUNITY_FOUNDER, msg.sender);
-   _grantRole(MEETUP_ORGANIZER, msg.sender);
    _grantRole(COMMUNITY_FOUNDER, _account);
-   
   }
 }
 
