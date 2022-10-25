@@ -38,19 +38,19 @@ This project contains a couple of smart contracts that can be deployed on EVM co
 `npm run release:test`
 ## Contracts
 
+- [Factory.sol](contracts/Factory.sol)
 - [Community.sol](contracts/Community.sol)
-- [CommunityFactory.sol](contracts/CommunityFactory.sol)
 - [Meetup.sol](contracts/Meetup.sol) OLD (@TODO must be updated)
 - [Organization.sol](contracts/Organization.sol) OLD (@TODO must be updated)
 
-## Contracts specs (CommunityFactory.sol)
+## Contracts specs (Factory.sol)
 (check test folder for details)
 - ✔ as owner I can change Community contract address
 - ✔ as owner I can change Community creation cost
 - ✔ as owner I can withdraw the contract balance
 - ✔ as user I can create a Community by passing 3 Matic
 - ✔ as user I cannot create a Community by passing less than 3 Matic
-- ✔ as user I can check if an address belongs to a Community contract created by CommunityFactory
+- ✔ as user I can check if an address belongs to a Community contract created by Factory
 ## Contracts specs (Meetup.sol) OLD
 (check test folder for details)
 

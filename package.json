@@ -6,6 +6,7 @@
   "scripts": {
     "console": "truffle console",
     "develop": "truffle develop",
+    "compile": "truffle compile",
     "release:ganache": "truffle migrate --network ganache",
     "release:ganache:reset": "truffle migrate --network ganache --reset",
     "release:mumbai": "truffle migrate --network mumbai",

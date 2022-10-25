@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/proxy/Clones.sol";
 
 import "./Community.sol";
 
-contract CommunityFactory is Ownable {
+contract Factory is Ownable {
   uint256 public communityCreationCost = 3 ether;
   address public communityContractAddress;
   address[] public communities;
@@ -24,13 +24,6 @@ contract CommunityFactory is Ownable {
   function setCommunityCreationCost(uint256 _price) external onlyOwner {
     communityCreationCost = _price;
   }
-  
-
-  function withdraw(address _receiver) external onlyOwner {
-    uint256 amount = address(this).balance;
-    (bool success, ) = _receiver.call{value: amount}("");
-    require(success, "Withdraw failed!");
-  }
 
   function createCommunity(string calldata _name) external payable {
     require(msg.value == communityCreationCost, "Wrong amount of money!");
@@ -40,7 +33,7 @@ contract CommunityFactory is Ownable {
     emit NewCommunity(newCommunity);
   }
 
-  function exists(address _communityAddress) external view returns(bool) {
+  function existsCommunity(address _communityAddress) external view returns(bool) {
     bool addressExists = false;
     // loop in reverse order because this function is primary used for recent created communities
     for(uint i = communities.length; i > 0; i--) {
@@ -50,5 +43,11 @@ contract CommunityFactory is Ownable {
       }
     }
     return addressExists;
+  }
+
+  function withdraw(address _receiver) external onlyOwner {
+    uint256 amount = address(this).balance;
+    (bool success, ) = _receiver.call{value: amount}("");
+    require(success, "Withdraw failed!");
   }
 }
