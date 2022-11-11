@@ -2,50 +2,53 @@
 pragma solidity 0.8.17;
 
 import "./Organization.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
-contract Meetup is AccessControl {
+contract Meetup is Initializable, AccessControl {
     
-    struct Topic {
+    struct Comment {
         address user;
         uint256 likes;
         string message;
     }
 
     uint256 private constant LIKE_COST = 0.1 ether;
-    uint256 private constant ADD_TOPIC_COST = 0.5 ether;
+    uint256 private constant ADD_COMMENT_COST = 0.5 ether;
 
-    bytes32 private constant ORGANIZER_ROLE = keccak256("ORGANIZER_ROLE");
+    //bytes32 private constant ORGANIZER_ROLE = keccak256("ORGANIZER_ROLE");
 
-    address payable private immutable owner;
-    Organization public immutable organization;
+    //address payable private immutable owner;
+    //Organization public immutable organization;
 
-    Topic[] public topics;
+    Comment[] public comments;
 
-    event NewTopic(address user, string message);
-    event NewLike(uint8 topicIndex, uint256 likes);
+    event NewComment(address user, string message);
+    event NewLike(uint8 commentIndex, uint256 likes);
 
     modifier cost(uint256 _price) {
         require(msg.value == _price, "Wrong amount of money!");
         _;
     }
 
-    constructor(Organization _organization) {
-        owner = payable(msg.sender);
-        organization = _organization;
-        address[] memory organizers = _organization.getOrganizers();
+    function initialize() external initializer {
+        //owner = payable(msg.sender);
+        //organization = _organization;
+        //address[] memory organizers = _organization.getOrganizers();
 
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        for (uint256 i = 0; i < organizers.length; i++) {
-            _setupRole(ORGANIZER_ROLE, organizers[i]);
-        }
+        //_setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        //for (uint256 i = 0; i < organizers.length; i++) {
+           // _setupRole(ORGANIZER_ROLE, organizers[i]);
+        //}
+
     }
 
-    function addTopic(string calldata _topic)
+
+    /* function addComment(string calldata _comment)
         external
         payable
-        cost(ADD_TOPIC_COST)
+        cost(ADD_COMMENT_COST)
     {
         // +1 because the new topic is not yet added to the list
         require(topics.length + 1 <= 10, "Max 10 topics allowed");
@@ -81,5 +84,5 @@ contract Meetup is AccessControl {
 
     function kill() external onlyRole(DEFAULT_ADMIN_ROLE) {
         selfdestruct(owner);
-    }
+    } */
 }

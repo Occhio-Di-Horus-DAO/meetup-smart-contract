@@ -3,11 +3,12 @@ const { expectRevert, expectEvent } = require("@openzeppelin/test-helpers");
 const { web3 } = require("@openzeppelin/test-helpers/src/setup");
 
 const Community = artifacts.require("Community");
+const Meetup = artifacts.require("Meetup");
 const Factory = artifacts.require("Factory");
 
 contract("Factory", ([owner, communityFounder, user]) => {
   it("as owner I can change Community contract address", async () => {
-    const factory = await Factory.new(Community.address);
+    const factory = await Factory.new(Community.address, Meetup.address);
     expect(await factory.communityContractAddress()).to.equal(
       Community.address
     );
@@ -31,7 +32,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
     );
   });
   it("as owner I can change Community creation cost", async () => {
-    const factory = await Factory.new(Community.address);
+    const factory = await Factory.new(Community.address, Meetup.address);
     let cost = await factory.communityCreationCost();
     expect(cost.toString()).to.equal(web3.utils.toWei("3", "ether"));
 
@@ -50,7 +51,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
     );
   });
   it("as owner I can withdraw the contract balance", async () => {
-    const factory = await Factory.new(Community.address);
+    const factory = await Factory.new(Community.address, Meetup.address);
     const cost = await factory.communityCreationCost();
     await factory.createCommunity("La Tela di Carlotta", {
       value: cost,
@@ -65,7 +66,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
     expect(balance).to.equal("0");
   });
   it("as user I can create a Community by passing 3 Matic", async () => {
-    const factory = await Factory.new(Community.address);
+    const factory = await Factory.new(Community.address, Meetup.address);
     const cost = await factory.communityCreationCost();
     const receipt = await factory.createCommunity("La Tela di Carlotta", {
       value: cost,
@@ -79,7 +80,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
     });
   });
   it("as user I cannot create a Community by passing less than 3 Matic", async () => {
-    const factory = await Factory.new(Community.address);
+    const factory = await Factory.new(Community.address, Meetup.address);
     expectRevert(
       factory.createCommunity("La Tela di Carlotta", {
         value: web3.utils.toWei("2", "ether"),
@@ -89,7 +90,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
     );
   });
   it("as user I can check if an address belongs to a Community contract created by Factory", async () => {
-    const factory = await Factory.new(Community.address);
+    const factory = await Factory.new(Community.address, Meetup.address);
     const cost = await factory.communityCreationCost();
     await factory.createCommunity("La Tela di Carlotta", {
       value: cost,

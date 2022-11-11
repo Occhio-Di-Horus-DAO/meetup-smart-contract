@@ -6,7 +6,7 @@ const Meetup = artifacts.require("Meetup");
 const Organization = artifacts.require("Organization");
 
 contract("Meetup", ([owner, organizer1, organizer2, user1, user2]) => {
-  let organization, meetup;
+  /* let organization, meetup;
 
   beforeEach(async () => {
     organization = await Organization.new(
@@ -225,5 +225,5 @@ contract("Meetup", ([owner, organizer1, organizer2, user1, user2]) => {
       topicIndex: "0",
       likes: "1",
     });
-  });
+  }); */
 });
