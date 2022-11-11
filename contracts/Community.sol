@@ -12,6 +12,7 @@ contract Community is Initializable, AccessControl  {
   string public name;
   address public founder;
 
+  
   function initialize(string memory _name, address _founder) external initializer {
     name = _name;
     founder = _founder;
@@ -19,6 +20,7 @@ contract Community is Initializable, AccessControl  {
     _setupRole(COMMUNITY_FOUNDER, _founder);
     _setupRole(MEETUP_ORGANIZER, _founder);
   }
+  
 
 
   function addOrganizer(address _account) external onlyRole(COMMUNITY_FOUNDER) {
@@ -34,6 +36,10 @@ contract Community is Initializable, AccessControl  {
    renounceRole(COMMUNITY_FOUNDER, msg.sender);
    _grantRole(MEETUP_ORGANIZER, msg.sender);
    _grantRole(COMMUNITY_FOUNDER, _account);
+  }
+
+  function isOrganizer(address _account) external view returns (bool) {
+    return hasRole(MEETUP_ORGANIZER, _account);
   }
 }
 
