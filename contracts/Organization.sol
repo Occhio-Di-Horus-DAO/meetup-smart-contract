@@ -8,7 +8,11 @@ contract Organization is PaymentSplitter {
   string name;
   address[] organizers;
 
-  constructor(string memory _name, address[] memory _organizers, uint256[] memory _shares) PaymentSplitter(_organizers, _shares) payable {
+  constructor (
+    string memory _name, 
+    address[] memory _organizers, 
+    uint256[] memory _shares
+  ) PaymentSplitter(_organizers, _shares) payable {
     name = _name;
     organizers = _organizers;
   }

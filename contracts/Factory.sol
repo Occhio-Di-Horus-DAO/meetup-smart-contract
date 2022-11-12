@@ -11,9 +11,7 @@ contract Factory is Ownable {
   uint256 public communityCreationCost = 3 ether;
   address public communityContractAddress;
   address[] public communities;
-  address public meetupContractAddress;///
-  //address[] public meetupOrganizers; //considerare di aggiungere questa parte in Community.sol, e fare ''.push'' dopo ogni organizer added, cosi da avere un array di Organizers///
-  //address[] public meetups;
+  address public meetupContractAddress; 
   uint256 public meetupCreationCost = 2 ether;
 
   event NewCommunity(address newCommunity);
@@ -61,9 +59,6 @@ contract Factory is Ownable {
     require(success, "Withdraw failed!");
   }
 
-              
-  //////////// QUI INIZIA LA SFIDA DI SUSHIPAPI DETTO SOLIDITYNOOB/////////////////
-
   function setMeetupCreationCost(uint256 _price) external onlyOwner {
     meetupCreationCost = _price;
   }
@@ -72,22 +67,21 @@ contract Factory is Ownable {
     meetupContractAddress = _meetupContractAddress;
   }
 
-
-
-  function createMeetup(string calldata _meetupName, Community _community, uint256 _meetupStartDate, address[] memory _meetupOrganizers) external payable  {
+  function createMeetup(
+    string calldata _meetupName, 
+    Community _community, 
+    uint256 _meetupStartDate, 
+    address[] memory _meetupOrganizers
+  ) external payable {
     require(msg.value == meetupCreationCost, "Wrong amount of money : cannot create Meetup");
     require(existsCommunity(address(_community)),"The Community does not exist!");
     require(_community.isOrganizer(msg.sender),"Not a Meetup Organizer!");
     for(uint i = 0; i < _meetupOrganizers.length; i ++) {
       require(_community.isOrganizer(_meetupOrganizers[i]),"Not in a  Meetup Organizers' list!");
       }
+
     address newMeetup = Clones.clone(meetupContractAddress);
     Meetup(newMeetup).initialize();
-    //meetups.push(newMeetup);
     emit NewMeetup(newMeetup);
-
-   
-    
-    
   }
 }
