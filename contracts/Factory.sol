@@ -73,12 +73,12 @@ contract Factory is Ownable {
     uint256 _meetupStartDate, 
     address[] memory _meetupOrganizers
   ) external payable {
-    require(msg.value == meetupCreationCost, "Wrong amount of money : cannot create Meetup");
+    require(msg.value == meetupCreationCost, "Wrong amount of money!");
     require(existsCommunity(address(_community)),"The Community does not exist!");
     require(_community.isOrganizer(msg.sender),"Not a Meetup Organizer!");
     for(uint i = 0; i < _meetupOrganizers.length; i ++) {
       require(_community.isOrganizer(_meetupOrganizers[i]),"Not in a  Meetup Organizers' list!");
-      }
+    }
 
     address newMeetup = Clones.clone(meetupContractAddress);
     Meetup(newMeetup).initialize();
