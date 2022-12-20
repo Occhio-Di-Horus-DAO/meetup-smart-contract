@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/proxy/Clones.sol";
 
 import "./Community.sol";
 import "./Meetup.sol";
+import "./Meetup.sol";
 
 contract Factory is Ownable {
   uint256 public communityCreationCost = 3 ether;
@@ -33,10 +34,10 @@ contract Factory is Ownable {
     communityCreationCost = _price;
   }
 
-  function createCommunity(string calldata _name) external payable {
+  function createCommunity(string calldata _name, address[] calldata _meetupOrganizers) external payable {
     require(msg.value == communityCreationCost, "Wrong amount of money!");
     address newCommunity = Clones.clone(communityContractAddress);
-    Community(newCommunity).initialize(_name, msg.sender);
+    Community(newCommunity).initialize(_name, msg.sender, _meetupOrganizers);
     communities.push(newCommunity);
     emit NewCommunity(newCommunity);
   }
