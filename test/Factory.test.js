@@ -54,7 +54,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
     it("as USER I can create a Community by passing 3 Matic", async () => {
       const factory = await Factory.new(Community.address, Meetup.address);
       const cost = await factory.communityCreationCost();
-      const receipt = await factory.createCommunity("La Tela di Carlotta", {
+      const receipt = await factory.createCommunity("La Tela di Carlotta", [], {
         value: cost,
         from: communityFounder,
       });
@@ -68,7 +68,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
     it("as USER I cannot create a Community by passing less than 3 Matic", async () => {
       const factory = await Factory.new(Community.address, Meetup.address);
       await expectRevert(
-        factory.createCommunity("La Tela di Carlotta", {
+        factory.createCommunity("La Tela di Carlotta", [], {
           value: web3.utils.toWei("2", "ether"),
           from: communityFounder,
         }),
@@ -78,11 +78,11 @@ contract("Factory", ([owner, communityFounder, user]) => {
     it("as USER I can check if an address belongs to a Community contract created by Factory", async () => {
       const factory = await Factory.new(Community.address, Meetup.address);
       const cost = await factory.communityCreationCost();
-      await factory.createCommunity("La Tela di Carlotta", {
+      await factory.createCommunity("La Tela di Carlotta", [], {
         value: cost,
         from: communityFounder,
       });
-      await factory.createCommunity("Non aprite quella Podcast", {
+      await factory.createCommunity("Non aprite quella Podcast", [], {
         value: cost,
         from: communityFounder,
       });
@@ -143,7 +143,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
     });
     it("as USER I can create a Meetup by passing 2 Matic", async () => {
       const factory = await Factory.new(Community.address, Meetup.address);
-      await factory.createCommunity("Mia Community", {
+      await factory.createCommunity("Mia Community", [], {
         value: web3.utils.toWei("3", "ether"),
         from: communityFounder,
       });
@@ -168,7 +168,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
 
     it("as USER I cannot create a Meetup by passing less than 2 Matic", async () => {
       const factory = await Factory.new(Community.address, Meetup.address);
-      await factory.createCommunity("Mia Community", {
+      await factory.createCommunity("Mia Community", [], {
         value: web3.utils.toWei("3", "ether"),
         from: communityFounder,
       });
@@ -187,7 +187,8 @@ contract("Factory", ([owner, communityFounder, user]) => {
       const randomCommunity = await Community.new();
       await randomCommunity.initialize(
         "Unofficial community",
-        communityFounder
+        communityFounder,
+        []
       );
 
       await expectRevert(
@@ -200,7 +201,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
     });
     it("as USER I cannot create a Meetup if i'm not an organizer of the community passed as param", async () => {
       const factory = await Factory.new(Community.address, Meetup.address);
-      await factory.createCommunity("Mia Community", {
+      await factory.createCommunity("Mia Community", [], {
         value: web3.utils.toWei("3", "ether"),
         from: communityFounder,
       });
@@ -216,7 +217,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
     });
     it("as USER I cannot create a Meetup if additional organizers aren't organizers of the community passed as param", async () => {
       const factory = await Factory.new(Community.address, Meetup.address);
-      await factory.createCommunity("Mia Community", {
+      await factory.createCommunity("Mia Community", [], {
         value: web3.utils.toWei("3", "ether"),
         from: communityFounder,
       });
@@ -235,7 +236,7 @@ contract("Factory", ([owner, communityFounder, user]) => {
   it("as OWNER I can withdraw the contract balance", async () => {
     const factory = await Factory.new(Community.address, Meetup.address);
     const cost = await factory.communityCreationCost();
-    await factory.createCommunity("La Tela di Carlotta", {
+    await factory.createCommunity("La Tela di Carlotta", [], {
       value: cost,
       from: communityFounder,
     });
