@@ -1,4 +1,4 @@
 build
 node_modules
 .env
-migrations/1647363238_update_meetup_contract.js
+.npmrc
